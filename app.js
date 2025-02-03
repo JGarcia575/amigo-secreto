@@ -12,14 +12,28 @@ function agregarAmigo() {
 
     } else {
         nombresAmigos.push(nombre);
-        limpiarTexto();       
+        limpiarTexto();
+        actualizarListaAmigos();       
     }; 
     
     return nombresAmigos;
 };
 
+function actualizarListaAmigos() {
+    document.getElementById('listaAmigos').innerHTML = '';
+    
+    for (let i = 0; i < nombresAmigos.length; i++) {
+        let elementoLista = document.createElement('li');
+        elementoLista.innerHTML = nombresAmigos[i];
+        document.getElementById('listaAmigos').appendChild(elementoLista);                
+    };
+    
+    return;
+};
+
 function limpiarTexto() {
     document.getElementById('amigo').value = '';
+    return;
 }
 
-console.log('Hola, estoy funcionando');
+
