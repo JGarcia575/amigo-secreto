@@ -2,7 +2,6 @@
 //array que contiene los nombres de los amigos
 let nombresAmigos = [];
 
-
 function agregarAmigo() {
     let nombre = document.getElementById('amigo').value;
     console.log(nombre);
@@ -29,6 +28,21 @@ function actualizarListaAmigos() {
     };
     
     return;
+};
+
+function sortearAmigo() {
+    if (nombresAmigos.length === 0) {
+        alert('No hay amigos añadidos. Asegurate de ingresar amigos a la lista.')
+    } else {
+        let amigoSorteado = nombresAmigos[generarIndice()];
+        document.getElementById('resultado').innerHTML = amigoSorteado;
+        console.log(amigoSorteado);
+    }
+};
+
+function generarIndice() {
+    let indice = Math.floor(Math.random() * nombresAmigos.length);
+    return indice;
 };
 
 function limpiarTexto() {
