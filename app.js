@@ -1,18 +1,19 @@
-// El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
-//array que contiene los nombres de los amigos
-let nombresAmigos = [];
+const nombresAmigos = [];
 
 function agregarAmigo() {
-    let nombre = document.getElementById('amigo').value;
+    //Acá tomamos el nombre que ingresa el usuario y quitamos los especios al incio y al final de la cadena
+    let nombre = document.getElementById('amigo').value.trim();
+    
     console.log(nombre);
-
-    if (nombre === '') {
-        alert('Por favor, ingrese un nombre válido.');
-
-    } else {
+    //Acá validamos si el usuario ingresa solo letras, si ingresa solo espacios o una cadena vacía dispara un alert
+    //Se permite nombres compuestos
+    if (/^[a-zA-Záéíóúñ\s]+$/.test(nombre)) {
         nombresAmigos.push(nombre);
         limpiarTexto();
-        actualizarListaAmigos();       
+        actualizarListaAmigos();             
+
+    } else {
+        alert('Por favor, ingrese un nombre que solo contenga letras.');       
     }; 
     
     return nombresAmigos;
