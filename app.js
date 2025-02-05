@@ -3,18 +3,25 @@ const nombresAmigos = [];
 function agregarAmigo() {
     //Acá tomamos el nombre que ingresa el usuario y quitamos los especios al incio y al final de la cadena
     let nombre = document.getElementById('amigo').value.trim();
-    
-    console.log(nombre);
-    //Acá validamos si el usuario ingresa solo letras, si ingresa solo espacios o una cadena vacía dispara un alert
+   
+    //Acá validamos si el usuario ingresa solo letras
+    //No se permiten caráteres especiales, números, solo espacioes en blancos y cadenas vacías
     //Se permite nombres compuestos
-    if (/^[a-zA-Záéíóúñ\s]+$/.test(nombre)) {
+    if (nombre == '') {
+        alert('Por favor, ingrese un nombre válido.');
+    } 
+    else if (!/^[a-zA-ZáéíóúñÁÉÍÓÚ\s]+$/.test(nombre)) {
+        alert('Por favor, ingrese solo letras.');
+    } 
+    else if (nombresAmigos.includes(nombre)){
+        alert('El nombre ya se encuentra en la lista.Ingrese otro.');          
+    } 
+    else {
         nombresAmigos.push(nombre);
-        limpiarTexto();
-        actualizarListaAmigos();             
-
-    } else {
-        alert('Por favor, ingrese un nombre que solo contenga letras.');       
+        actualizarListaAmigos();  
     }; 
+
+    limpiarTexto();
     
     return nombresAmigos;
 };
