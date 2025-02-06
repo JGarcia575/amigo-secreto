@@ -1,11 +1,13 @@
 const nombresAmigos = [];
 
+const indicesSorteados = [];
+
 function agregarAmigo() {
     //Acá tomamos el nombre que ingresa el usuario y quitamos los especios al incio y al final de la cadena
     let nombre = document.getElementById('amigo').value.trim();
    
     //Acá validamos si el usuario ingresa solo letras
-    //No se permiten caráteres especiales, números, solo espacioes en blancos y cadenas vacías
+    //No se permiten caráteres especiales, números, espacioes en blancos y cadenas vacías
     //Se permite nombres compuestos
     if (nombre == '') {
         alert('Por favor, ingrese un nombre válido.');
@@ -39,18 +41,40 @@ function actualizarListaAmigos() {
 };
 
 function sortearAmigo() {
+    
     if (nombresAmigos.length === 0) {
         alert('No hay amigos añadidos. Asegurate de ingresar amigos a la lista.')
-    } else {
+    } 
+    else {
         let amigoSorteado = nombresAmigos[generarIndice()];
-        document.getElementById('resultado').innerHTML = amigoSorteado;
+        
+        if (amigoSorteado !== undefined) {
+            document.getElementById('resultado').innerHTML = amigoSorteado;
+        };
+        
         console.log(amigoSorteado);
-    }
+    };
 };
 
 function generarIndice() {
     let indice = Math.floor(Math.random() * nombresAmigos.length);
-    return indice;
+
+    console.log(indice);
+
+    if (indicesSorteados.length === nombresAmigos.length) {
+        alert('Ya se sortearon todos los amigos');
+        document.getElementById('sortear').setAttribute('disabled', "");
+    }
+    else {
+        if (indicesSorteados.includes(indice)) {
+            return generarIndice();
+        } 
+        else {
+            indicesSorteados.push(indice);
+            return indice;
+        };
+    };   
+    
 };
 
 function limpiarTexto() {
