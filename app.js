@@ -46,39 +46,56 @@ function sortearAmigo() {
         alert('No hay amigos añadidos. Asegurate de ingresar amigos a la lista.')
     } 
     else {
-        let amigoSorteado = nombresAmigos[generarIndice()];
         
-        if (amigoSorteado !== undefined) {
+        let amigoSorteado = obtenerAmigo();
+        //acá validamos el valor de la función obtenerAmigo()
+        //si el valor es nulo no se muestra el amigo elegido, en cambio si es un nombre se muestra el amigo
+        if (amigoSorteado) {
             document.getElementById('resultado').innerHTML = amigoSorteado;
-        };
-        
-        console.log(amigoSorteado);
+        } 
+        else {
+            document.getElementById('resultado').innerHTML = '';
+            resetearListas();
+            
+        };     
     };
 };
 
-function generarIndice() {
-    let indice = Math.floor(Math.random() * nombresAmigos.length);
-
-    console.log(indice);
-
+function obtenerAmigo() {
+    //áca evaluamos si ya se sortearon todos los amigos
     if (indicesSorteados.length === nombresAmigos.length) {
         alert('Ya se sortearon todos los amigos');
-        document.getElementById('sortear').setAttribute('disabled', "");
-    }
-    else {
-        if (indicesSorteados.includes(indice)) {
-            return generarIndice();
-        } 
-        else {
-            indicesSorteados.push(indice);
-            return indice;
-        };
-    };   
+
+        return null;
+    };
+
+    let indice = generarIndice();
+    indicesSorteados.push(indice);
+        
+    return nombresAmigos[indice];}
+
+
+function generarIndice() {
+    let indice;  
+    // este bucle genera índices no repetidos 
+    do {
+        indice = Math.floor(Math.random() * nombresAmigos.length);
+    } while(indicesSorteados.includes(indice)) 
     
+    return indice;    
 };
+
+function resetearListas() {
+    //acá reseteamos los arrays
+    nombresAmigos.length = 0;
+    indicesSorteados.length = 0;
+
+    return;
+} 
 
 function limpiarTexto() {
     document.getElementById('amigo').value = '';
+    
     return;
 }
 
