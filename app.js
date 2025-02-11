@@ -2,12 +2,14 @@ const nombresAmigos = [];
 
 const indicesSorteados = [];
 
+const listaAmigos = document.getElementById('listaAmigos');
+
 function agregarAmigo() {
     //Acá tomamos el nombre que ingresa el usuario y quitamos los especios al incio y al final de la cadena
-    let nombre = document.getElementById('amigo').value.trim();
+    const nombre = document.getElementById('amigo').value.trim();
    
     //Acá validamos si el usuario ingresa solo letras
-    //No se permiten caráteres especiales, números, espacioes en blancos y cadenas vacías
+    //No se permiten caráteres especiales, números, espacios en blancos y cadenas vacías
     //Se permite nombres compuestos
     if (nombre == '') {
         alert('Por favor, ingrese un nombre válido.');
@@ -16,7 +18,7 @@ function agregarAmigo() {
         alert('Por favor, ingrese solo letras.');
     } 
     else if (nombresAmigos.includes(nombre)){
-        alert('El nombre ya se encuentra en la lista.Ingrese otro.');          
+        alert('El nombre ya se encuentra en la lista. Ingrese otro.');          
     } 
     else {
         nombresAmigos.push(nombre);
@@ -29,19 +31,20 @@ function agregarAmigo() {
 };
 
 function actualizarListaAmigos() {
-    document.getElementById('listaAmigos').innerHTML = '';
+    listaAmigos.innerHTML = '';
     
     for (let i = 0; i < nombresAmigos.length; i++) {
-        let elementoLista = document.createElement('li');
+        const elementoLista = document.createElement('li');
         elementoLista.innerHTML = nombresAmigos[i];
-        document.getElementById('listaAmigos').appendChild(elementoLista);                
+        listaAmigos.appendChild(elementoLista);                
     };
     
     return;
 };
 
 function sortearAmigo() {
-    
+    const resultado = document.getElementById('resultado');
+
     if (nombresAmigos.length === 0) {
         alert('No hay amigos añadidos. Asegurate de ingresar amigos a la lista.')
     } 
@@ -51,11 +54,12 @@ function sortearAmigo() {
         //acá validamos el valor de la función obtenerAmigo()
         //si el valor es nulo no se muestra el amigo elegido, en cambio si es un nombre se muestra el amigo
         if (amigoSorteado) {
-            document.getElementById('resultado').innerHTML = amigoSorteado;
+            resultado.innerHTML = amigoSorteado;
         } 
         else {
-            document.getElementById('resultado').innerHTML = '';
-            resetearListas();
+            resultado.innerHTML = '';
+            listaAmigos.innerHTML = '';
+            resetearArrays();
             
         };     
     };
@@ -64,7 +68,7 @@ function sortearAmigo() {
 function obtenerAmigo() {
     //áca evaluamos si ya se sortearon todos los amigos
     if (indicesSorteados.length === nombresAmigos.length) {
-        alert('Ya se sortearon todos los amigos');
+        alert('Ya se sortearon todos los amigos.Ingresa nuevos nombres');
 
         return null;
     };
@@ -85,7 +89,7 @@ function generarIndice() {
     return indice;    
 };
 
-function resetearListas() {
+function resetearArrays() {
     //acá reseteamos los arrays
     nombresAmigos.length = 0;
     indicesSorteados.length = 0;
