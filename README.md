@@ -20,7 +20,7 @@ _El usuario deberá agregar nombres mediante un campo de texto y un botón "Adic
 
 ## 💻 Instalación del proyecto 💻
 
-_Descargar el proyecto desde <a href='https://github.com/JGarcia575/amigo-secreto'>aquí</a> y abrirlo con un editor de código_.
+_Descargar el proyecto desde <a href='https://github.com/JGarcia575/amigo-secreto/archive/refs/heads/main.zip'>aquí</a> y abrirlo con un editor de código_.
 
 ## 🚧 Estado del proyecto 🚧
 
